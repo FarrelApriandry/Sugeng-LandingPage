@@ -7,8 +7,9 @@
 ## 📌 Gambaran Umum & Pemetaan Domain
 Website ini adalah landing page publik resmi untuk ekosistem **SUGENG** yang ditujukan bagi masyarakat umum, investor, dinas pemerintahan, dan kalangan akademik yang ingin mengetahui:
 1. **Apa itu SUGENG?** (Urgensi krisis sampah TPSA Banyuurip & profil sistem)
-2. **Apa yang bisa dilakukan SUGENG?** (Fitur 4 modul dashboard operasional)
-3. **Bagaimana SUGENG bekerja?** (Alur 3 langkah: Sensor IoT $\rightarrow$ Cloud PostGIS $\rightarrow$ Optimasi CVRP Armada)
+2. **Kecerdasan Dual-Engine AI** (Model 1: Regresi Diurnal TTO $R^2 = 99{,}01\%$ & Model 2: Fusi 4-Sensor Klasifikasi K3 Akurasi $100\%$)
+3. **Apa yang bisa dilakukan SUGENG?** (Fitur 4 modul dashboard operasional)
+4. **Bagaimana SUGENG bekerja?** (Alur 3 langkah: Fusi 4 Sensor IoT $\rightarrow$ Inferensi Dual-AI $\rightarrow$ Optimasi CVRP Armada)
 
 ### Struktur Domain & Subdomain
 * **`sugenghub.my.id`** $\rightarrow$ **Landing Page Utama (Repositori ini)**  

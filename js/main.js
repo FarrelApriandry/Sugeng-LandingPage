@@ -97,7 +97,12 @@ function initPreviewWidget() {
   const fillBar = document.getElementById('previewFillBar');
   const distanceVal = document.getElementById('previewDistanceVal');
   const gasVal = document.getElementById('previewGasVal');
+  const methaneVal = document.getElementById('previewMethaneVal');
   const tempVal = document.getElementById('previewTempVal');
+  const aiTto = document.getElementById('previewAiTto');
+  const aiRate = document.getElementById('previewAiRate');
+  const aiHazard = document.getElementById('previewAiHazard');
+  const aiAction = document.getElementById('previewAiAction');
   const cvrpTag = document.getElementById('previewCvrpTag');
   const routingHeadline = document.getElementById('previewRoutingHeadline');
   const routingSub = document.getElementById('previewRoutingSub');
@@ -113,8 +118,14 @@ function initPreviewWidget() {
       fillBarWidth: '99.1%',
       barColor: '#c94e47',
       distance: '28,0 cm',
-      gas: '3/100 (Aman)',
-      temp: '31,5 °C',
+      gas: '36/100',
+      methane: '120 ppm',
+      temp: '28,5 °C',
+      tto: '0 menit (Penuh)',
+      ttoRate: 'Laju: Kapasitas Maksimal',
+      hazard: 'Sanitasi Normal (Wadah Penuh)',
+      hazardColor: '#c94e47',
+      hazardAction: 'Segera kosongkan wadah tempat penampungan sekarang juga.',
       cvrpTag: 'CVRP: STOP #5 (116,5 L)',
       routingHeadline: 'Armada Truk DLH 03 (Isuzu Elf 6-Roda)',
       routingSub: 'Rute Teroptimasi: Hemat 43,7% Jarak (9,8 km) & Solar 2,1 L',
@@ -127,10 +138,16 @@ function initPreviewWidget() {
       fillBarWidth: '62.0%',
       barColor: '#b77924',
       distance: '52,4 cm',
-      gas: '62/100 (Indikasi Bau)',
-      temp: '32,1 °C',
+      gas: '78/100',
+      methane: '185 ppm',
+      temp: '32,4 °C',
+      tto: '3j 15m (17:45 WIB)',
+      ttoRate: 'Laju terdeteksi: +8,8% / jam',
+      hazard: 'Waspada Bau Amonia',
+      hazardColor: '#b77924',
+      hazardAction: 'Bau pembusukan sampah basah tinggi. Jadwalkan semprot disinfektan.',
       cvrpTag: 'CVRP: STOP #2 (73,0 L)',
-      routingHeadline: 'Peringatan Sanitasi Terdeteksi',
+      routingHeadline: 'Peringatan Sanitasi & Bau Busuk',
       routingSub: 'Sensor MQ-135 mencatat gas amonia melebihi ambang batas higienis.',
     },
     safe: {
@@ -141,11 +158,17 @@ function initPreviewWidget() {
       fillBarWidth: '32.0%',
       barColor: '#176b49',
       distance: '88,5 cm',
-      gas: '12/100 (Normal)',
-      temp: '29,4 °C',
+      gas: '18/100',
+      methane: '42 ppm',
+      temp: '29,1 °C',
+      tto: '14j 20m (Besok Pagi)',
+      ttoRate: 'Laju normal: +4,5% / jam',
+      hazard: 'Sanitasi Aman (Sampah Segar)',
+      hazardColor: '#176b49',
+      hazardAction: 'Status stabil: Laju buangan normal, belum butuh dispatch armada.',
       cvrpTag: 'STATUS: AMAN',
-      routingHeadline: 'Jadwal Reguler Siang Hari',
-      routingSub: 'Tidak membutuhkan armada darurat saat ini. Hemat bahan bakar.',
+      routingHeadline: 'Jadwal Pengambilan Normal',
+      routingSub: 'Tidak membutuhkan armada darurat saat ini. Hemat bahan bakar solar.',
     },
   };
 
@@ -167,7 +190,15 @@ function initPreviewWidget() {
       fillBar.style.backgroundColor = data.barColor;
       distanceVal.textContent = data.distance;
       gasVal.textContent = data.gas;
+      if (methaneVal) methaneVal.textContent = data.methane;
       tempVal.textContent = data.temp;
+      if (aiTto) aiTto.textContent = data.tto;
+      if (aiRate) aiRate.textContent = data.ttoRate;
+      if (aiHazard) {
+        aiHazard.textContent = data.hazard;
+        aiHazard.style.color = data.hazardColor;
+      }
+      if (aiAction) aiAction.textContent = data.hazardAction;
       cvrpTag.textContent = data.cvrpTag;
       routingHeadline.textContent = data.routingHeadline;
       routingSub.textContent = data.routingSub;

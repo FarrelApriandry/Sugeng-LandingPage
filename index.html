@@ -6,14 +6,14 @@
   <title>SUGENG — Sistem Unggulan Pengelolaan & Monitoring Sampah Kota Magelang</title>
   
   <!-- SEO & Social Meta -->
-  <meta name="description" content="Sistem cerdas pengelolaan persampahan Kota Magelang berbasis IoT (ESP32, JSN-SR04T, MQ-135) dan Algoritma CVRP untuk efisiensi rute armada dan pencegahan krisis sampah TPSA Banyuurip.">
-  <meta name="keywords" content="SUGENG, Sampah Magelang, Smart Waste Management, IoT ESP32, CVRP, DLH Kota Magelang, TPSA Banyuurip, UNTIDAR">
+  <meta name="description" content="Sistem cerdas pengelolaan persampahan Kota Magelang berbasis telemetri 4 sensor IoT (JSN-SR04T, MQ-135, MQ-4, DHT22), Dual-Engine AI (Regresi TTO & Klasifikasi K3), dan Algoritma CVRP untuk efisiensi rute armada dan pencegahan krisis sampah TPSA Banyuurip.">
+  <meta name="keywords" content="SUGENG, Sampah Magelang, Smart Waste Management, Dual-Engine AI, IoT ESP32, JSN-SR04T, MQ-135, MQ-4, DHT22, CVRP, DLH Kota Magelang, TPSA Banyuurip, UNTIDAR">
   <meta name="author" content="Tim Peneliti SUGENG - Universitas Tidar">
   
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sugenghub.my.id/">
-  <meta property="og:title" content="SUGENG — Pengelolaan Sampah Cerdas Kota Magelang">
-  <meta property="og:description" content="Pantau volume TPS 24/7, cegah penumpukan sampah, dan optimalkan rute truk armada dengan algoritma CVRP.">
+  <meta property="og:title" content="SUGENG — Pengelolaan Sampah Cerdas & Dual-Engine AI Kota Magelang">
+  <meta property="og:description" content="Pantau volume TPS 24/7, prediksi jam penuh dengan AI, deteksi risiko gas & bau busuk, dan optimalkan rute truk armada dengan algoritma CVRP.">
   <meta property="og:image" content="./assets/img/Logo_SUGENG_opt.png">
 
   <!-- Favicon Icons (LOGO_SUGENG_IMUP) -->
@@ -41,13 +41,14 @@
         <img class="brand-logo-img" src="./assets/img/LOGO_SUGENG_IMUP.png" alt="Logo SUGENG">
         <div class="brand-info">
           <span class="brand-name">SUGENG</span>
-          <span class="brand-tag">Kota Magelang · IoT & CVRP</span>
+          <span class="brand-tag">Kota Magelang · IoT &amp; Dual-AI</span>
         </div>
       </a>
 
       <nav class="nav-menu" aria-label="Navigasi Utama">
         <a href="#tentang" class="nav-link">Tentang</a>
         <a href="#alur-kerja" class="nav-link">Alur Kerja</a>
+        <a href="#dual-ai" class="nav-link">Kecerdasan AI</a>
         <a href="#fitur" class="nav-link">Fitur Sistem</a>
         <a href="#dampak" class="nav-link">Dampak</a>
         <a href="#arsitektur" class="nav-link">Arsitektur</a>
@@ -86,6 +87,10 @@
           <span>Alur Kerja 3 Langkah</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
         </a>
+        <a href="#dual-ai" class="mobile-nav-link">
+          <span>Kecerdasan Dual-Engine AI</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
         <a href="#fitur" class="mobile-nav-link">
           <span>4 Modul Utama Dashboard</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
@@ -121,16 +126,16 @@
         <div class="hero-content">
           <div class="hero-badge">
             <span class="hero-badge-tag">Riset S-1 TI UNTIDAR</span>
-            <span>Studi Kasus: DLH & TPSA Banyuurip</span>
+            <span>IoT Telemetri &amp; Dual-Engine AI Intelligence</span>
           </div>
 
           <h1 class="hero-title">
             Sampah terpantau.<br>
-            <span>Penanganan tepat waktu.</span>
+            <span>Diprediksi cerdas dengan AI.</span>
           </h1>
 
           <p class="hero-desc">
-            SUGENG (Sistem Unggulan Pengelolaan & Monitoring Sampah) membantu Dinas Lingkungan Hidup memantau kondisi Tempat Penampungan Sementara (TPS) secara <em>real-time</em>, mendeteksi risiko bau dan gas metana, serta merencanakan rute penjemputan armada truk sampah secara teroptimasi menggunakan algoritma CVRP.
+            SUGENG (Sistem Unggulan Pengelolaan &amp; Monitoring Sampah) mengintegrasikan telemetri 4 sensor IoT (JSN-SR04T, MQ-135, MQ-4, DHT22) dan <strong>Dual-Engine AI</strong> untuk memprediksi waktu meluapnya tempat sampah (Time-to-Overflow), mendeteksi risiko pembusukan dan bahaya gas metana, serta merencanakan rute penjemputan armada truk DLH Kota Magelang secara teroptimasi.
           </p>
 
           <div class="hero-actions">
@@ -140,8 +145,8 @@
                 <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
-            <a href="#alur-kerja" class="btn btn-secondary btn-lg">
-              <span>Pelajari Alur Kerja ↓</span>
+            <a href="#dual-ai" class="btn btn-secondary btn-lg">
+              <span>Jelajahi Dual-Engine AI ↓</span>
             </a>
           </div>
 
@@ -152,20 +157,20 @@
 
           <div class="hero-metrics-pill-row">
             <div class="hero-metric-item">
-              <span class="hero-metric-val">9 TPS</span>
-              <span class="hero-metric-label">Titik Pantau Magelang</span>
+              <span class="hero-metric-val">4 Sensor</span>
+              <span class="hero-metric-label">Fusi Data Lingkungan</span>
+            </div>
+            <div class="hero-metric-item">
+              <span class="hero-metric-val">99,01%</span>
+              <span class="hero-metric-label">Akurasi Prediksi Waktu (R²)</span>
+            </div>
+            <div class="hero-metric-item">
+              <span class="hero-metric-val">100%</span>
+              <span class="hero-metric-label">Presisi Deteksi Risiko Gas (F1)</span>
             </div>
             <div class="hero-metric-item">
               <span class="hero-metric-val">43,7%</span>
-              <span class="hero-metric-label">Efisiensi Jarak CVRP</span>
-            </div>
-            <div class="hero-metric-item">
-              <span class="hero-metric-val">2,1 L</span>
-              <span class="hero-metric-label">Hemat Solar per Ritase</span>
-            </div>
-            <div class="hero-metric-item">
-              <span class="hero-metric-val">24/7</span>
-              <span class="hero-metric-label">Mandiri Tenaga Surya</span>
+              <span class="hero-metric-label">Efisiensi Jarak Armada</span>
             </div>
           </div>
         </div>
@@ -220,12 +225,41 @@
                   <strong id="previewDistanceVal">28,0 cm</strong>
                 </div>
                 <div class="preview-sensor-cell">
-                  <label>Gas Bau (MQ-135)</label>
-                  <strong id="previewGasVal">3/100 (Aman)</strong>
+                  <label>Amonia (MQ-135)</label>
+                  <strong id="previewGasVal">36/100</strong>
+                </div>
+                <div class="preview-sensor-cell">
+                  <label>Metana (MQ-4)</label>
+                  <strong id="previewMethaneVal">120 ppm</strong>
                 </div>
                 <div class="preview-sensor-cell">
                   <label>Suhu (DHT22)</label>
-                  <strong id="previewTempVal">31,5 °C</strong>
+                  <strong id="previewTempVal">28,5 °C</strong>
+                </div>
+              </div>
+
+              <!-- Preview Dual-Engine AI Assessment Box -->
+              <div class="preview-ai-box">
+                <div class="preview-ai-header">
+                  <div class="preview-ai-title">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                    </svg>
+                    <span>DUAL-ENGINE AI INFERENCE</span>
+                  </div>
+                  <span class="preview-ai-badge" id="previewAiBadge">MODEL 1 &amp; 2 AKTIF</span>
+                </div>
+                <div class="preview-ai-grid">
+                  <div class="preview-ai-col">
+                    <small>Estimasi Waktu Penuh (TTO)</small>
+                    <strong id="previewAiTto">0 menit (Penuh)</strong>
+                    <span id="previewAiRate">Laju: Kapasitas Maksimal</span>
+                  </div>
+                  <div class="preview-ai-col">
+                    <small>Klasifikasi Risiko K3 (4-Sensor)</small>
+                    <strong id="previewAiHazard" style="color: var(--red);">Sanitasi Normal (Wadah Penuh)</strong>
+                    <span id="previewAiAction">Segera kosongkan wadah tempat penampungan sekarang juga.</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -413,15 +447,15 @@
                 <text x="125" y="72" fill="#c94e47" font-size="9" font-family="'IBM Plex Mono', monospace" text-anchor="middle" font-weight="bold">CRIT</text>
               </svg>
             </div>
-            <h3>Pemrosesan Data &amp; Pemetaan Digital</h3>
+            <h3>Komputasi Dual-Engine AI &amp; Prediksi K3</h3>
             <p>
-              Sistem komputasi server memvalidasi data sensor secara otomatis, mengklasifikasikan status keterisian (Aman &lt;50%, Siaga 50–74%, Kritis &ge;75%), dan memperbarui posisi lokasi TPS secara langsung.
+              Dual-Engine AI memproses data secara paralel: Model 1 memprediksi jam meluapnya wadah (Time-to-Overflow, R² 99,01%), sementara Model 2 mendeteksi risiko bau amonia busuk dan gas metana berbahaya (Akurasi 100%).
             </p>
             <div class="workflow-tech-tags">
-              <span class="workflow-tag">Server Cerdas</span>
-              <span class="workflow-tag">Klasifikasi Otomatis</span>
-              <span class="workflow-tag">Pemetaan Digital</span>
-              <span class="workflow-tag">Pusat Data Terpadu</span>
+              <span class="workflow-tag">Model 1: Regresi TTO</span>
+              <span class="workflow-tag">Model 2: Klasifikasi K3</span>
+              <span class="workflow-tag">Fusi 4 Sensor</span>
+              <span class="workflow-tag">Inferensi Real-Time</span>
             </div>
           </div>
 
@@ -456,6 +490,142 @@
     </section>
 
     <!-- ==============================================================================
+         DUAL-ENGINE AI & SENSOR JUSTIFICATION SECTION
+         ============================================================================== -->
+    <section class="ai-section" id="dual-ai">
+      <div class="container">
+        <div class="text-center center-box" style="margin-bottom: 36px;">
+          <div class="eyebrow">
+            <span class="eyebrow-dot" style="background: var(--green);"></span>
+            <span>Kecerdasan Buatan Terintegrasi</span>
+          </div>
+          <h2 class="section-title">Arsitektur Dual-Engine AI SUGENG</h2>
+          <p class="section-desc center-box">
+            Dua model machine learning khusus yang mengolah telemetri fusi 4 sensor secara bersamaan: memprediksi jam meluapnya tempat sampah dan mendeteksi bahaya pembusukan organik serta gas metana sebelum risiko membesar.
+          </p>
+        </div>
+
+        <!-- 2 Cards for Model 1 & Model 2 -->
+        <div class="ai-models-grid">
+          <!-- Card Model 1 -->
+          <div class="ai-model-card">
+            <div class="ai-model-badge">MODEL 1 · REGRESI DERET WAKTU</div>
+            <h3 class="ai-model-title">Diurnal Time-Series Regressor (TTO)</h3>
+            <p class="ai-model-desc">
+              Memprediksi estimasi jam tempat sampah akan penuh <em>(Time-to-Overflow)</em> dengan memodelkan laju akumulasi sampah per jam berdasarkan ritme aktivitas harian warga Kota Magelang (puncak pagi 06:00–09:00 dan sore 16:00–19:00).
+            </p>
+
+            <div class="ai-metrics-row">
+              <div class="ai-metric-box">
+                <span class="ai-metric-num">99,01%</span>
+                <span class="ai-metric-lbl">R² Determinasi</span>
+                <small>Akurasi Prediksi Sangat Tinggi</small>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-num">1,55%</span>
+                <span class="ai-metric-lbl">MAE Volume</span>
+                <small>Rata-rata Margin Error Rendah</small>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-num">2,62%</span>
+                <span class="ai-metric-lbl">RMSE Fluktuasi</span>
+                <small>Robust Terhadap Lonjakan</small>
+              </div>
+            </div>
+
+            <div class="ai-features-list">
+              <div class="ai-feature-item">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>Dataset Pelatihan:</strong> 1.344 rekaman telemetri kontinu (14 hari pengamatan Kota Magelang).</span>
+              </div>
+              <div class="ai-feature-item">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>Output Aksi:</strong> Hitung mundur jam &amp; menit menuju batas peringatan 75% dan batas meluber 100%.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Model 2 -->
+          <div class="ai-model-card">
+            <div class="ai-model-badge" style="color: var(--amber); background: var(--amber-soft); border-color: rgba(183, 121, 36, 0.25);">MODEL 2 · KLASIFIKASI MULTI-SENSOR K3</div>
+            <h3 class="ai-model-title">Multi-Sensor Odor &amp; Hazard Classifier</h3>
+            <p class="ai-model-desc">
+              Mengkorelasikan 4 sensor sekaligus untuk mendeteksi pembusukan sampah basah dan risiko gas metana beracun/mudah terbakar akibat terik matahari, bahkan saat volume wadah masih di bawah 40%.
+            </p>
+
+            <div class="ai-metrics-row">
+              <div class="ai-metric-box">
+                <span class="ai-metric-num" style="color: var(--amber);">100%</span>
+                <span class="ai-metric-lbl">Akurasi Uji</span>
+                <small>Confusion Matrix 4×4 Sempurna</small>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-num" style="color: var(--amber);">1,00</span>
+                <span class="ai-metric-lbl">Macro F1-Score</span>
+                <small>Presisi Seimbang di 4 Kelas</small>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-num" style="color: var(--amber);">4 Kelas</span>
+                <span class="ai-metric-lbl">Kategori Risiko</span>
+                <small>Mitigasi K3 &amp; Sanitasi Lingkungan</small>
+              </div>
+            </div>
+
+            <div class="ai-features-list">
+              <div class="ai-feature-item">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--amber)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>4 Kelas Deteksi:</strong> Normal (Segar), Degradasi Aktif (Amonia), Bahaya Metana (Api), Anomali Sensor.</span>
+              </div>
+              <div class="ai-feature-item">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--amber)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>Output Aksi:</strong> Notifikasi semprot disinfektan higienis atau ventilasi darurat pencegahan kebakaran.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Justifikasi Ilmiah 4 Sensor IoT Banner -->
+        <div class="sensor-justification-card">
+          <div class="sensor-just-header">
+            <div>
+              <div class="eyebrow" style="color: var(--green); margin-bottom: 6px;">Justifikasi Ilmiah Sensor SUGENG</div>
+              <h3>Mengapa Membutuhkan Fusi 4 Sensor?</h3>
+              <p>
+                Menjawab tantangan nyata di lapangan: tempat sampah tidak hanya dinilai dari apakah volumenya sudah penuh, tetapi juga dampak kesehatan lingkungan dan keamanan warga di sekitarnya.
+              </p>
+            </div>
+          </div>
+
+          <div class="sensor-just-grid">
+            <div class="sensor-just-box">
+              <div class="sensor-just-chip">SENSOR 01 · ULTRASONIK</div>
+              <h4>JSN-SR04T Kedap Air</h4>
+              <p>Mengukur ketinggian fisik tumpukan sampah secara presisi tanpa sentuhan fisik. Dilengkapi proteksi blind-zone 20 cm dan tahan cipratan air limbah.</p>
+            </div>
+            <div class="sensor-just-box">
+              <div class="sensor-just-chip">SENSOR 02 · AMONIA</div>
+              <h4>MQ-135 Air Quality</h4>
+              <p>Mendeteksi gas amonia (NH3), sulfida, dan alkohol hasil fermentasi bahan organik basah pembawa bau busuk menyengat di fasilitas publik.</p>
+            </div>
+            <div class="sensor-just-box">
+              <div class="sensor-just-chip">SENSOR 03 · METANA</div>
+              <h4>MQ-4 Combustible Gas</h4>
+              <p>Memantau akumulasi gas metana (CH4) yang mudah terbakar jika terperangkap di wadah tertutup di bawah paparan terik matahari (ambang K3 &lt; 250 ppm).</p>
+            </div>
+            <div class="sensor-just-box">
+              <div class="sensor-just-chip">SENSOR 04 · IKLIM MIKRO</div>
+              <h4>DHT22 Suhu &amp; RH</h4>
+              <p>Mencatat suhu dan kelembapan udara mikro di dalam bak tempat sampah yang mengkatalisis kecepatan penguraian biokimia mikroorganisme anaerob.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
          CORE MODULES / FEATURES SECTION
          ============================================================================== -->
     <section class="features-section" id="fitur">
@@ -481,14 +651,14 @@
               </svg>
             </div>
             <div class="feature-content">
-              <h3>1. Pusat Operasi &amp; Peta Digital Interaktif</h3>
+              <h3>1. Pusat Operasi &amp; Prediksi Waktu Penuh Real-Time</h3>
               <p>
-                Visualisasi peta digital cerdas yang memetakan seluruh titik TPS Kota Magelang, koordinat lokasi, rute armada pengangkutan, serta panel inspeksi keterisian sampah secara langsung (real-time).
+                Visualisasi peta digital interaktif seluruh TPS Kota Magelang dengan integrasi kartu inspeksi <strong>Dual-Engine AI</strong> yang menampilkan prediksi jam meluap (TTO), grafik estimasi akumulasi per jam, dan status risiko sanitasi K3.
               </p>
               <ul class="feature-bullets">
+                <li><span class="feature-bullet-dot"></span> Kartu prediksi AI (Model 1 TTO &amp; Model 2 Klasifikasi K3)</li>
+                <li><span class="feature-bullet-dot"></span> Dialog modal ilmiah lengkap dengan metrik R², MAE &amp; Confusion Matrix 4×4</li>
                 <li><span class="feature-bullet-dot"></span> Indikator warna status (Merah: Kritis, Oranye: Siaga, Hijau: Aman)</li>
-                <li><span class="feature-bullet-dot"></span> Marker Kampus Tuguran UNTIDAR dengan animasi pulse coordinate</li>
-                <li><span class="feature-bullet-dot"></span> Pencarian instan dan filter wilayah (Magelang Utara, Tengah, Selatan)</li>
               </ul>
             </div>
           </div>
@@ -503,7 +673,7 @@
               </svg>
             </div>
             <div class="feature-content">
-              <h3>2. Logistik Armada & Optimasi CVRP</h3>
+              <h3>2. Logistik Armada &amp; Optimasi CVRP</h3>
               <p>
                 Manajemen pengiriman truk sampah berbasis algoritma CVRP dengan kalkulasi efisiensi muatan bak truk, pemangkasan jarak tempuh, penghematan BBM solar, dan reduksi emisi gas buang.
               </p>
@@ -524,14 +694,14 @@
               </svg>
             </div>
             <div class="feature-content">
-              <h3>3. Diagnostik Sensor &amp; Pemantauan Perangkat</h3>
+              <h3>3. Diagnostik Sensor &amp; Laboratorium Metrik AI</h3>
               <p>
-                Pengawasan kondisi fisik dan keandalan modul sensor di lapangan secara berkala, mencakup akurasi jarak ultrasonik, konsentrasi gas pembusukan, suhu lingkungan, dan kestabilan transmisi data.
+                Pengawasan komprehensif register 4 sensor IoT (JSN-SR04T, MQ-135, MQ-4, DHT22) dan performa inferensi Dual-Engine AI secara langsung, mencakup evaluasi determinasi R², MAE, RMSE, serta skor atribusi sensor per titik penampungan.
               </p>
               <ul class="feature-bullets">
-                <li><span class="feature-bullet-dot"></span> Modul Sensor Ultrasonik JSN-SR04T, MQ-135 (Amonia), MQ-4 (Metana), dan DHT22 (Suhu)</li>
-                <li><span class="feature-bullet-dot"></span> Pantauan arus data telemetri langsung dari modul di tempat penampungan</li>
-                <li><span class="feature-bullet-dot"></span> Fitur uji koneksi dan diagnosa perangkat terintegrasi pada dashboard</li>
+                <li><span class="feature-bullet-dot"></span> Register telemetri real-time: Ultrasonik, Gas Amonia, Gas Metana, Suhu &amp; RH</li>
+                <li><span class="feature-bullet-dot"></span> Kartu status arsitektur Dual-Engine AI (TTO Regressor &amp; Hazard Classifier)</li>
+                <li><span class="feature-bullet-dot"></span> Konsol live stream paket telemetri dan integrasi koneksi serial ESP32</li>
               </ul>
             </div>
           </div>
@@ -578,27 +748,27 @@
 
         <div class="impact-grid">
           <div class="impact-card">
-            <span class="impact-val">43,7%</span>
-            <div class="impact-title">Efisiensi Jarak Rute</div>
-            <p class="impact-desc">Memangkas jarak tempuh armada dari 17,4 km (rute konvensional) menjadi hanya 9,8 km teroptimasi.</p>
-          </div>
-
-          <div class="impact-card">
-            <span class="impact-val">2,1 L</span>
-            <div class="impact-title">Penghematan Solar</div>
-            <p class="impact-desc">Mengurangi konsumsi bahan bakar solar industri pada armada Isuzu Elf 6-Roda di setiap ritase penjemputan.</p>
-          </div>
-
-          <div class="impact-card">
-            <span class="impact-val">5,5 kg</span>
-            <div class="impact-title">Reduksi Emisi CO₂</div>
-            <p class="impact-desc">Menurunkan emisi karbon ekivalen per perjalanan, mendukung target udara bersih dan kota ramah lingkungan.</p>
+            <span class="impact-val">99,01%</span>
+            <div class="impact-title">Akurasi Prediksi Waktu (R²)</div>
+            <p class="impact-desc">Model regresi deret waktu memprediksi jam meluapnya tempat sampah dengan tingkat determinasi ilmiah sangat tinggi.</p>
           </div>
 
           <div class="impact-card">
             <span class="impact-val">100%</span>
-            <div class="impact-title">Daya Mandiri Surya</div>
-            <p class="impact-desc">Node telemetri bekerja secara mandiri tanpa ketergantungan jaringan listrik PLN melalui panel surya 50Wp.</p>
+            <div class="impact-title">Presisi Deteksi Risiko Gas (F1)</div>
+            <p class="impact-desc">Klasifikasi multi-sensor mengidentifikasi pembusukan aktif dan gas metana secara akurat di seluruh 4 kelas bahaya K3.</p>
+          </div>
+
+          <div class="impact-card">
+            <span class="impact-val">43,7%</span>
+            <div class="impact-title">Efisiensi Jarak Rute</div>
+            <p class="impact-desc">Memangkas jarak tempuh armada dari 17,4 km (rute konvensional) menjadi hanya 9,8 km teroptimasi CVRP.</p>
+          </div>
+
+          <div class="impact-card">
+            <span class="impact-val">2,1 L</span>
+            <div class="impact-title">Hemat Solar per Ritase</div>
+            <p class="impact-desc">Mengurangi konsumsi bahan bakar solar industri pada armada Isuzu Elf 6-Roda di setiap ritase penjemputan.</p>
           </div>
         </div>
 
@@ -741,6 +911,7 @@
           <ul class="footer-links">
             <li><a href="#tentang">Tentang Sistem</a></li>
             <li><a href="#alur-kerja">Alur Kerja 3 Langkah</a></li>
+            <li><a href="#dual-ai">Kecerdasan Dual-AI</a></li>
             <li><a href="#fitur">Fitur Utama</a></li>
             <li><a href="#dampak">Dampak &amp; Efisiensi</a></li>
             <li><a href="#tim">Tim &amp; Riset</a></li>

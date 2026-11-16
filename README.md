@@ -20,7 +20,7 @@ Website ini adalah landing page publik resmi untuk ekosistem **SUGENG** yang dit
 
 ## 🎨 Desain & Identitas Visual
 * **Palet Warna:** Identik dengan `Sugeng-Dashboard` (*Forest Green* `#176b49`, *Dark Green* `#0f2b1d`, *Canvas* `#f5f7f5`, *Surface* `#ffffff`, *Lime Accent* `#d9ef8b`, *Red Alert* `#c94e47`).
-* **Tipografi:** Google Fonts *Plus Jakarta Sans*, *DM Sans*, dan *IBM Plex Mono*.
+* **Tipografi:** Google Fonts *Plus Jakarta Sans* (Heading & Body) dan *IBM Plex Mono* (Data, Angka Metrik, & Tags) — Terstandarisasi maksimal 2 font keluarga.
 * **Widget Simulasi Interaktif:** Pengunjung dapat mencoba pergantian skenario kondisi TPS (*Kritis Tuguran*, *Siaga Bau Alun-Alun*, *Aman Rejowinangun*) langsung di layar hero.
 * **Responsif Penuh:** Mengikuti panduan *Three-State Reflow* (`antislop-layoutmobile`) untuk desktop ($\ge 1024\text{px}$), tablet ($768\text{px}-1023\text{px}$), dan smartphone ($< 768\text{px}$). Target sentuh $\ge 44\text{px}$ dengan zero horizontal scroll leak.
 

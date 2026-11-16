@@ -55,9 +55,9 @@
       </nav>
 
       <div class="nav-actions">
-        <div class="nav-status-badge" title="Sistem terhubung ke Supabase Realtime & PostGIS">
+        <div class="nav-status-badge" title="Sistem pemantauan aktif dan terhubung real-time">
           <span class="nav-status-dot"></span>
-          <span>LIVE CLOUD</span>
+          <span>SISTEM AKTIF</span>
         </div>
         <a href="https://dash.sugenghub.my.id" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
           <span>Buka Dashboard</span>
@@ -181,7 +181,7 @@
               </div>
               <span class="preview-subdomain-pill">dash.sugenghub.my.id/logistik-armada</span>
             </div>
-            <span style="font-size: 10px; color: var(--green); font-weight: 700; font-family: var(--mono);">WSS CONNECTED</span>
+            <span style="font-size: 10px; color: var(--green); font-weight: 700; font-family: var(--mono);">STATUS: ONLINE</span>
           </div>
 
           <!-- Scenario Switcher Tabs -->
@@ -254,7 +254,7 @@
           <div class="preview-footer-action">
             <div class="preview-live-indicator">
               <span class="nav-status-dot"></span>
-              <span>Sinkronisasi Otomatis PostgreSQL</span>
+              <span>Pembaruan Data Otomatis Real-Time</span>
             </div>
             <a href="https://dash.sugenghub.my.id" class="btn btn-sm btn-primary" target="_blank" rel="noopener noreferrer">
               Buka Peta Operasi ↗
@@ -288,7 +288,7 @@
             </div>
             <h3>Fasilitas Beroperasi Sejak 1995, Diproyeksikan Penuh pada 2028</h3>
             <p>
-              Dengan beban buangan harian mencapai <strong>65 hingga 76 ton sampah</strong>, TPSA Banyuurip menghadapi kelebihan beban (*overload*). Tanpa optimasi penjemputan dan reduksi ritase yang terukur, krisis persampahan dapat memicu pencemaran lindi (*leachate*) dan gangguan sanitasi pemukiman warga Kota Magelang.
+              Dengan beban buangan harian mencapai <strong>65 hingga 76 ton sampah</strong>, TPSA Banyuurip menghadapi kelebihan beban <em>(overload)</em>. Tanpa optimasi penjemputan dan reduksi ritase yang terukur, krisis persampahan dapat memicu pencemaran air lindi <em>(leachate)</em> dan gangguan sanitasi pemukiman warga Kota Magelang.
             </p>
           </div>
           <div class="problem-stats-grid">
@@ -413,15 +413,15 @@
                 <text x="125" y="72" fill="#c94e47" font-size="9" font-family="'IBM Plex Mono', monospace" text-anchor="middle" font-weight="bold">CRIT</text>
               </svg>
             </div>
-            <h3>Evaluasi Ambang Batas & Spasial</h3>
+            <h3>Pemrosesan Data &amp; Pemetaan Digital</h3>
             <p>
-              Gateway Elysia.js memvalidasi payload sensor, mengklasifikasi status (Aman &lt;50%, Siaga 50–74%, Kritis &ge;75%), dan menyimpan koordinat spasial ke Supabase PostgreSQL PostGIS.
+              Sistem komputasi server memvalidasi data sensor secara otomatis, mengklasifikasikan status keterisian (Aman &lt;50%, Siaga 50–74%, Kritis &ge;75%), dan memperbarui posisi lokasi TPS secara langsung.
             </p>
             <div class="workflow-tech-tags">
-              <span class="workflow-tag">Elysia.js</span>
-              <span class="workflow-tag">Bun</span>
-              <span class="workflow-tag">PostgreSQL</span>
-              <span class="workflow-tag">PostGIS (Point 4326)</span>
+              <span class="workflow-tag">Server Cerdas</span>
+              <span class="workflow-tag">Klasifikasi Otomatis</span>
+              <span class="workflow-tag">Pemetaan Digital</span>
+              <span class="workflow-tag">Pusat Data Terpadu</span>
             </div>
           </div>
 
@@ -481,9 +481,9 @@
               </svg>
             </div>
             <div class="feature-content">
-              <h3>1. Pusat Operasi & GIS Live Map</h3>
+              <h3>1. Pusat Operasi &amp; Peta Digital Interaktif</h3>
               <p>
-                Visualisasi spasial berbasis Leaflet.js yang memetakan seluruh titik TPS Kota Magelang, koordinat EPSG:4326, jalur rute pengangkutan, serta panel inspeksi keterisian real-time.
+                Visualisasi peta digital cerdas yang memetakan seluruh titik TPS Kota Magelang, koordinat lokasi, rute armada pengangkutan, serta panel inspeksi keterisian sampah secara langsung (real-time).
               </p>
               <ul class="feature-bullets">
                 <li><span class="feature-bullet-dot"></span> Indikator warna status (Merah: Kritis, Oranye: Siaga, Hijau: Aman)</li>
@@ -524,14 +524,14 @@
               </svg>
             </div>
             <div class="feature-content">
-              <h3>3. Diagnostik Sensor & Terminal Live</h3>
+              <h3>3. Diagnostik Sensor &amp; Pemantauan Perangkat</h3>
               <p>
-                Pengawasan kesehatan register sensor telemetri secara mendalam, termasuk pembacaan mentah ADC, blind zone ultrasonik, konsentrasi gas pembusukan, dan koneksi serial bridge lokal.
+                Pengawasan kondisi fisik dan keandalan modul sensor di lapangan secara berkala, mencakup akurasi jarak ultrasonik, konsentrasi gas pembusukan, suhu lingkungan, dan kestabilan transmisi data.
               </p>
               <ul class="feature-bullets">
-                <li><span class="feature-bullet-dot"></span> Sensor JSN-SR04T, MQ-135 (Amonia), MQ-4 (Metana), dan DHT22 (Suhu)</li>
-                <li><span class="feature-bullet-dot"></span> Terminal console paket data live dari port USB Serial atau WebSocket</li>
-                <li><span class="feature-bullet-dot"></span> Tombol pengujian koneksi hardware langsung dari browser web</li>
+                <li><span class="feature-bullet-dot"></span> Modul Sensor Ultrasonik JSN-SR04T, MQ-135 (Amonia), MQ-4 (Metana), dan DHT22 (Suhu)</li>
+                <li><span class="feature-bullet-dot"></span> Pantauan arus data telemetri langsung dari modul di tempat penampungan</li>
+                <li><span class="feature-bullet-dot"></span> Fitur uji koneksi dan diagnosa perangkat terintegrasi pada dashboard</li>
               </ul>
             </div>
           </div>
@@ -622,7 +622,7 @@
             <div class="arch-box">
               <div>
                 <div class="arch-box-domain">dash.sugenghub.my.id</div>
-                <div class="arch-box-role">Pusat Operasi, Peta GIS, CVRP, &amp; Ingest IoT Telemetri</div>
+                <div class="arch-box-role">Pusat Operasi, Peta Digital, Rute Armada Truk, &amp; Monitoring Sensor Live</div>
               </div>
               <a href="https://dash.sugenghub.my.id" class="btn btn-sm btn-primary" target="_blank" rel="noopener noreferrer">Buka ↗</a>
             </div>
@@ -706,7 +706,7 @@
         </div>
         <h2 class="cta-title">Siap Melihat Sistem SUGENG Beroperasi Secara Langsung?</h2>
         <p class="cta-desc">
-          Buka dashboard operasional untuk memantau status keterisian TPS secara live, menjalankan simulasi rute CVRP, dan membaca register sensor IoT Kota Magelang.
+          Buka dashboard operasional untuk memantau status keterisian TPS secara live, menjalankan simulasi rute CVRP, dan memantau pembacaan sensor IoT Kota Magelang.
         </p>
         <div class="cta-btn-group">
           <a href="https://dash.sugenghub.my.id" class="btn btn-lg cta-btn-primary" target="_blank" rel="noopener noreferrer">
@@ -750,10 +750,10 @@
         <div class="footer-col">
           <h5>Ekosistem</h5>
           <ul class="footer-links">
-            <li><a href="https://sugenghub.my.id">sugenghub.my.id (Landing)</a></li>
-            <li><a href="https://dash.sugenghub.my.id" target="_blank" rel="noopener noreferrer">dash.sugenghub.my.id (Dashboard)</a></li>
-            <li><a href="https://github.com/FarrelApriandry/Sugeng-Web-Dashboard" target="_blank" rel="noopener noreferrer">GitHub Frontend</a></li>
-            <li><a href="https://github.com/FarrelApriandry/BE-SUGENG" target="_blank" rel="noopener noreferrer">GitHub Backend</a></li>
+            <li><a href="https://sugenghub.my.id">sugenghub.my.id (Portal Informasi)</a></li>
+            <li><a href="https://dash.sugenghub.my.id" target="_blank" rel="noopener noreferrer">dash.sugenghub.my.id (Dashboard Operasi)</a></li>
+            <li><a href="https://github.com/FarrelApriandry/Sugeng-Web-Dashboard" target="_blank" rel="noopener noreferrer">Dokumentasi Aplikasi Dashboard</a></li>
+            <li><a href="https://github.com/FarrelApriandry/BE-SUGENG" target="_blank" rel="noopener noreferrer">Dokumentasi Layanan Server</a></li>
           </ul>
         </div>
 
@@ -763,7 +763,7 @@
             Dinas Lingkungan Hidup Kota Magelang &amp; TPSA Banyuurip, Jawa Tengah, Indonesia.
           </p>
           <div style="font-size: 11px; font-family: var(--mono); color: var(--green); font-weight: 700;">
-            Koordinat EPSG:4326 · -7.4721, 110.2188
+            Kota Magelang · -7.4721, 110.2188
           </div>
         </div>
       </div>

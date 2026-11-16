@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUGENG — Sistem Unggulan Pengelolaan & Monitoring Sampah Kota Magelang</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="Sistem cerdas pengelolaan persampahan Kota Magelang berbasis IoT (ESP32, JSN-SR04T, MQ-135) dan Algoritma CVRP untuk efisiensi rute armada dan pencegahan krisis sampah TPSA Banyuurip.">
+  <meta name="keywords" content="SUGENG, Sampah Magelang, Smart Waste Management, IoT ESP32, CVRP, DLH Kota Magelang, TPSA Banyuurip, UNTIDAR">
+  <meta name="author" content="Tim Peneliti SUGENG - Universitas Tidar">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sugenghub.my.id/">
+  <meta property="og:title" content="SUGENG — Pengelolaan Sampah Cerdas Kota Magelang">
+  <meta property="og:description" content="Pantau volume TPS 24/7, cegah penumpukan sampah, dan optimalkan rute truk armada dengan algoritma CVRP.">
+  <meta property="og:image" content="./assets/img/Logo_SUGENG_opt.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./assets/img/favicon.svg">
+
+  <!-- Typography: Plus Jakarta Sans, DM Sans, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- ==============================================================================
+       TOPBAR & NAVIGATION
+       ============================================================================== -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="./" class="brand" aria-label="Beranda SUGENG">
+        <img class="brand-logo-img" src="./assets/img/LOGO_SUGENG_IMUP.png" alt="Logo SUGENG">
+        <div class="brand-info">
+          <span class="brand-name">SUGENG</span>
+          <span class="brand-tag">Kota Magelang · IoT & CVRP</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navigasi Utama">
+        <a href="#tentang" class="nav-link">Tentang</a>
+        <a href="#alur-kerja" class="nav-link">Alur Kerja</a>
+        <a href="#fitur" class="nav-link">Fitur Sistem</a>
+        <a href="#dampak" class="nav-link">Dampak</a>
+        <a href="#arsitektur" class="nav-link">Arsitektur</a>
+        <a href="#tim" class="nav-link">Tim & Riset</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="nav-status-badge" title="Sistem terhubung ke Supabase Realtime & PostGIS">
+          <span class="nav-status-dot"></span>
+          <span>LIVE CLOUD</span>
+        </div>
+        <a href="https://dash.sugenghub.my.id" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          <span>Buka Dashboard</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <button class="mobile-toggle" aria-label="Buka menu navigasi" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Menu Navigasi Mobile">
+    <div class="mobile-drawer-content">
+      <div class="mobile-nav-links">
+        <a href="#tentang" class="mobile-nav-link">
+          <span>Tentang SUGENG</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a href="#alur-kerja" class="mobile-nav-link">
+          <span>Alur Kerja 3 Langkah</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a href="#fitur" class="mobile-nav-link">
+          <span>4 Modul Utama Dashboard</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a href="#dampak" class="mobile-nav-link">
+          <span>Dampak & Efisiensi BBM</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a href="#arsitektur" class="mobile-nav-link">
+          <span>Arsitektur Platform</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a href="#tim" class="mobile-nav-link">
+          <span>Tim Peneliti & UNTIDAR</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+      </div>
+      <a href="https://dash.sugenghub.my.id" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer" style="width: 100%;">
+        <span>Masuk ke Dashboard Operasi ↗</span>
+      </a>
+      <div style="font-size: 11px; color: var(--muted); text-align: center; font-family: var(--mono);">
+        Subdomain: dash.sugenghub.my.id
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==============================================================================
+         HERO SECTION
+         ============================================================================== -->
+    <section class="hero-section" id="beranda">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-tag">Riset S-1 TI UNTIDAR</span>
+            <span>Studi Kasus: DLH & TPSA Banyuurip</span>
+          </div>
+
+          <h1 class="hero-title">
+            Sampah terpantau.<br>
+            <span>Penanganan tepat waktu.</span>
+          </h1>
+
+          <p class="hero-desc">
+            SUGENG (Sistem Unggulan Pengelolaan & Monitoring Sampah) membantu Dinas Lingkungan Hidup memantau kondisi Tempat Penampungan Sementara (TPS) secara <em>real-time</em>, mendeteksi risiko bau dan gas metana, serta merencanakan rute penjemputan armada truk sampah secara teroptimasi menggunakan algoritma CVRP.
+          </p>
+
+          <div class="hero-actions">
+            <a href="https://dash.sugenghub.my.id" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+              <span>Buka Dashboard Operasi</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="#alur-kerja" class="btn btn-secondary btn-lg">
+              <span>Pelajari Alur Kerja ↓</span>
+            </a>
+          </div>
+
+          <div class="hero-subdomain-note">
+            <span>Akses pusat kontrol operasi live di</span>
+            <strong>dash.sugenghub.my.id</strong>
+          </div>
+
+          <div class="hero-metrics-pill-row">
+            <div class="hero-metric-item">
+              <span class="hero-metric-val">9 TPS</span>
+              <span class="hero-metric-label">Titik Pantau Magelang</span>
+            </div>
+            <div class="hero-metric-item">
+              <span class="hero-metric-val">43,7%</span>
+              <span class="hero-metric-label">Efisiensi Jarak CVRP</span>
+            </div>
+            <div class="hero-metric-item">
+              <span class="hero-metric-val">2,1 L</span>
+              <span class="hero-metric-label">Hemat Solar per Ritase</span>
+            </div>
+            <div class="hero-metric-item">
+              <span class="hero-metric-val">24/7</span>
+              <span class="hero-metric-label">Mandiri Tenaga Surya</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Operations Preview Card (Hero Visual) -->
+        <div class="preview-card" aria-label="Widget Simulasi Operasi SUGENG">
+          <div class="preview-header">
+            <div class="preview-header-left">
+              <div class="preview-dot-group">
+                <span class="preview-dot red"></span>
+                <span class="preview-dot yellow"></span>
+                <span class="preview-dot green"></span>
+              </div>
+              <span class="preview-subdomain-pill">dash.sugenghub.my.id/logistik-armada</span>
+            </div>
+            <span style="font-size: 10px; color: var(--green); font-weight: 700; font-family: var(--mono);">WSS CONNECTED</span>
+          </div>
+
+          <!-- Scenario Switcher Tabs -->
+          <div class="preview-tabs" role="tablist" aria-label="Pilih Simulasi Kondisi TPS">
+            <button class="preview-tab-btn active" role="tab" data-scenario="critical">Kritis (Tuguran)</button>
+            <button class="preview-tab-btn" role="tab" data-scenario="warning">Siaga Bau (Alun-Alun)</button>
+            <button class="preview-tab-btn" role="tab" data-scenario="safe">Aman (Rejowinangun)</button>
+          </div>
+
+          <div class="preview-body">
+            <!-- Node Telemetry Box -->
+            <div class="preview-node-box">
+              <div class="preview-node-top">
+                <div>
+                  <h3 class="preview-node-title" id="previewNodeTitle">TPS Kampus Tuguran UNTIDAR</h3>
+                  <div class="preview-node-meta" id="previewNodeMeta">Magelang Utara · ID: NODE-05 · Koordinat (-7.4642, 110.2291)</div>
+                </div>
+                <div id="previewNodeBadge">
+                  <span class="badge-critical">● PRIORITAS PENGANGKUTAN</span>
+                </div>
+              </div>
+
+              <div class="preview-meter">
+                <div class="preview-meter-head">
+                  <span style="color: var(--muted); font-size: 11px;">Keterisian Wadah HDPE 120 L</span>
+                  <strong style="font-family: var(--mono); font-size: 14px;" id="previewFillPct">99,1%</strong>
+                </div>
+                <div class="preview-meter-bar">
+                  <div class="preview-meter-fill" id="previewFillBar"></div>
+                </div>
+              </div>
+
+              <div class="preview-sensor-grid">
+                <div class="preview-sensor-cell">
+                  <label>Jarak (JSN-SR04T)</label>
+                  <strong id="previewDistanceVal">28,0 cm</strong>
+                </div>
+                <div class="preview-sensor-cell">
+                  <label>Gas Bau (MQ-135)</label>
+                  <strong id="previewGasVal">3/100 (Aman)</strong>
+                </div>
+                <div class="preview-sensor-cell">
+                  <label>Suhu (DHT22)</label>
+                  <strong id="previewTempVal">31,5 °C</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Routing Dispatch Preview -->
+            <div class="preview-routing-box">
+              <div class="preview-routing-info">
+                <div class="preview-truck-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <circle cx="7.5" cy="18" r="2" fill="white" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="17.5" cy="18" r="2" fill="white" stroke="currentColor" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div class="preview-routing-text">
+                  <h4 id="previewRoutingHeadline">Armada Truk DLH 03 (Isuzu Elf 6-Roda)</h4>
+                  <p id="previewRoutingSub">Rute Teroptimasi: Hemat 43,7% Jarak (9,8 km) & Solar 2,1 L</p>
+                </div>
+              </div>
+              <div class="preview-cvrp-tag" id="previewCvrpTag">
+                CVRP: STOP #5 (116,5 L)
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-footer-action">
+            <div class="preview-live-indicator">
+              <span class="nav-status-dot"></span>
+              <span>Sinkronisasi Otomatis PostgreSQL</span>
+            </div>
+            <a href="https://dash.sugenghub.my.id" class="btn btn-sm btn-primary" target="_blank" rel="noopener noreferrer">
+              Buka Peta Operasi ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         PROBLEM CONTEXT SECTION (KRISIS PERSAMPAHAN MAGELANG)
+         ============================================================================== -->
+    <section class="problem-section" id="tentang">
+      <div class="container">
+        <div class="text-center center-box" style="margin-bottom: 36px;">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>Urgensi Tata Kelola Persampahan</span>
+          </div>
+          <h2 class="section-title">Mengapa Kota Magelang Membutuhkan SUGENG?</h2>
+          <p class="section-desc center-box">
+            Keterbatasan kapasitas Tempat Pemrosesan Akhir (TPSA) dan ketidakefisienan metode pengangkutan konvensional menuntut transisi menuju sistem monitoring cerdas yang berbasis data nyata.
+          </p>
+        </div>
+
+        <!-- Banner Krisis TPSA Banyuurip -->
+        <div class="problem-banner">
+          <div>
+            <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: var(--lime); text-transform: uppercase; margin-bottom: 8px;">
+              Krisis Kapasitas TPSA Banyuurip
+            </div>
+            <h3>Fasilitas Beroperasi Sejak 1995, Diproyeksikan Penuh pada 2028</h3>
+            <p>
+              Dengan beban buangan harian mencapai <strong>65 hingga 76 ton sampah</strong>, TPSA Banyuurip menghadapi kelebihan beban (*overload*). Tanpa optimasi penjemputan dan reduksi ritase yang terukur, krisis persampahan dapat memicu pencemaran lindi (*leachate*) dan gangguan sanitasi pemukiman warga Kota Magelang.
+            </p>
+          </div>
+          <div class="problem-stats-grid">
+            <div class="problem-stat-box">
+              <span class="problem-stat-num">76 Ton</span>
+              <span class="problem-stat-lbl">Volume sampah harian yang masuk ke TPSA Banyuurip</span>
+            </div>
+            <div class="problem-stat-box">
+              <span class="problem-stat-num">2028</span>
+              <span class="problem-stat-lbl">Batas usia operasional ideal bila tanpa optimasi sistem</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perbandingan: Metode Lama vs SUGENG -->
+        <div class="comparison-grid">
+          <div class="comparison-card bad">
+            <div class="comparison-card-head">
+              <div class="comparison-icon-wrap">✕</div>
+              <h4>Metode Pengangkutan Konvensional</h4>
+            </div>
+            <ul class="comparison-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#c94e47" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <span><strong>Rute statis dan kaku:</strong> Truk mendatangi TPS sesuai jadwal tetap, tanpa tahu apakah bak sampah sudah penuh atau masih kosong.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#c94e47" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <span><strong>Pemborosan bahan bakar (BBM):</strong> Jarak tempuh membengkak hingga 17,4 km karena armada memeriksa lokasi yang belum mendesak.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#c94e47" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <span><strong>Keluhan bau dan lindi:</strong> Keterlambatan penanganan pada TPS pasar menyebabkan sampah meluap dan membusuk di ruang publik.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="comparison-card good">
+            <div class="comparison-card-head">
+              <div class="comparison-icon-wrap">✓</div>
+              <h4>Pendekatan Berbasis Sistem SUGENG</h4>
+            </div>
+            <ul class="comparison-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#176b49" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>Pemantauan telemetri IoT 24/7:</strong> Sensor ultrasonik JSN-SR04T dan gas MQ-135/MQ-4 melaporkan kondisi riil setiap interval waktu.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#176b49" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>Optimasi rute armada CVRP:</strong> Truk hanya mendatangi titik kritis (&ge;75%), memangkas jarak ke 9,8 km dan menghemat solar 2,1 L per ritase.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#176b49" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>Lingkungan kota lebih higienis:</strong> Deteksi dini kenaikan gas amonia mencegah timbulnya bau busuk menyengat di kawasan pemukiman.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         WORKFLOW SECTION (3-STEP PIPELINE)
+         ============================================================================== -->
+    <section class="workflow-section" id="alur-kerja">
+      <div class="container">
+        <div class="text-center center-box">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>Arsitektur End-to-End</span>
+          </div>
+          <h2 class="section-title">Bagaimana SUGENG Bekerja?</h2>
+          <p class="section-desc center-box">
+            Alur kerja terintegrasi dari pembacaan sensor fisik di tempat penampungan sampah hingga penerbitan Surat Perintah Jalan (SPJ) bagi supir armada.
+          </p>
+        </div>
+
+        <div class="workflow-grid">
+          <!-- Step 1 -->
+          <div class="workflow-card">
+            <div class="step-num-badge">01</div>
+            <div class="workflow-visual-box">
+              <svg viewBox="0 0 200 120" fill="none">
+                <rect x="25" y="30" width="60" height="75" rx="6" fill="#ffffff" stroke="#176b49" stroke-width="2"/>
+                <path d="M20 30h70M45 20h20" stroke="#176b49" stroke-width="2" stroke-linecap="round"/>
+                <rect x="35" y="60" width="40" height="35" rx="3" fill="#e8f4ed"/>
+                <!-- Sensor waves -->
+                <circle cx="55" cy="40" r="4" fill="#c94e47"/>
+                <path d="M47 48q8 8 16 0M42 54q13 12 26 0" stroke="#c94e47" stroke-width="1.8" fill="none"/>
+                <!-- Wireless waves -->
+                <path d="M105 50q15-15 30 0M112 55q8-8 16 0" stroke="#176b49" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="145" y="45" width="30" height="30" rx="6" fill="#176b49"/>
+                <text x="160" y="64" fill="#ffffff" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">ESP</text>
+              </svg>
+            </div>
+            <h3>Deteksi Sensor & Telemetri IoT</h3>
+            <p>
+              Sensor JSN-SR04T kedap air mengukur tinggi sampah, MQ-135 mendeteksi gas amonia, MQ-4 memantau metana, dan DHT22 mencatat suhu udara. Mikrokontroler ESP32 mengirimkan paket data nirkabel bertenaga panel surya.
+            </p>
+            <div class="workflow-tech-tags">
+              <span class="workflow-tag">ESP32 DevKit V1</span>
+              <span class="workflow-tag">JSN-SR04T</span>
+              <span class="workflow-tag">MQ-135</span>
+              <span class="workflow-tag">MQ-4</span>
+              <span class="workflow-tag">Solar 50Wp</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="workflow-card">
+            <div class="step-num-badge">02</div>
+            <div class="workflow-visual-box">
+              <svg viewBox="0 0 200 120" fill="none">
+                <rect x="40" y="25" width="120" height="70" rx="8" fill="#ffffff" stroke="#2a5a3f" stroke-width="2"/>
+                <path d="M40 45h120" stroke="#e2ece5" stroke-width="1.5"/>
+                <circle cx="55" cy="35" r="3" fill="#ea5a52"/>
+                <circle cx="65" cy="35" r="3" fill="#e5a93b"/>
+                <circle cx="75" cy="35" r="3" fill="#52b86c"/>
+                <rect x="55" y="55" width="40" height="25" rx="4" fill="#eaf4ee"/>
+                <rect x="105" y="55" width="40" height="25" rx="4" fill="#fbefed"/>
+                <text x="75" y="72" fill="#176b49" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">SAFE</text>
+                <text x="125" y="72" fill="#c94e47" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">CRIT</text>
+              </svg>
+            </div>
+            <h3>Evaluasi Ambang Batas & Spasial</h3>
+            <p>
+              Gateway Elysia.js memvalidasi payload sensor, mengklasifikasi status (Aman &lt;50%, Siaga 50–74%, Kritis &ge;75%), dan menyimpan koordinat spasial ke Supabase PostgreSQL PostGIS.
+            </p>
+            <div class="workflow-tech-tags">
+              <span class="workflow-tag">Elysia.js</span>
+              <span class="workflow-tag">Bun</span>
+              <span class="workflow-tag">PostgreSQL</span>
+              <span class="workflow-tag">PostGIS (Point 4326)</span>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="workflow-card">
+            <div class="step-num-badge">03</div>
+            <div class="workflow-visual-box">
+              <svg viewBox="0 0 200 120" fill="none">
+                <!-- Map path -->
+                <circle cx="40" cy="60" r="10" fill="#3975a5"/>
+                <text x="40" y="64" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle" font-weight="bold">P</text>
+                <path d="M40 60 L90 35 L140 50 L170 85" stroke="#176b49" stroke-width="3" stroke-dasharray="4 3"/>
+                <circle cx="90" cy="35" r="8" fill="#c94e47"/>
+                <circle cx="140" cy="50" r="8" fill="#c94e47"/>
+                <circle cx="170" cy="85" r="10" fill="#176b49"/>
+                <text x="170" y="89" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle" font-weight="bold">TPA</text>
+              </svg>
+            </div>
+            <h3>Optimasi CVRP & Disposisi Armada</h3>
+            <p>
+              Algoritma <em>Capacitated Vehicle Routing Problem</em> menyusun rute terpendek untuk TPS prioritas, memperhitungkan kapasitas bak truk (600 L), dan menerbitkan SPJ resmi untuk supir armada pengangkut.
+            </p>
+            <div class="workflow-tech-tags">
+              <span class="workflow-tag">Algoritma CVRP</span>
+              <span class="workflow-tag">Closed-Loop Routing</span>
+              <span class="workflow-tag">SPJ Digital</span>
+              <span class="workflow-tag">Isuzu Elf 6-Roda</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         CORE MODULES / FEATURES SECTION
+         ============================================================================== -->
+    <section class="features-section" id="fitur">
+      <div class="container">
+        <div class="text-center center-box">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>Fitur Dashboard Operasi</span>
+          </div>
+          <h2 class="section-title">4 Modul Terpadu untuk Dinas Lingkungan Hidup</h2>
+          <p class="section-desc center-box">
+            Akses dashboard operasional lengkap di <strong>dash.sugenghub.my.id</strong> yang dirancang dengan antarmuka responsif bagi operator ruang kontrol maupun petugas lapangan.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Modul 1 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 3v15M15 6v15" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>1. Pusat Operasi & GIS Live Map</h3>
+              <p>
+                Visualisasi spasial berbasis Leaflet.js yang memetakan seluruh titik TPS Kota Magelang, koordinat EPSG:4326, jalur rute pengangkutan, serta panel inspeksi keterisian real-time.
+              </p>
+              <ul class="feature-bullets">
+                <li><span class="feature-bullet-dot"></span> Indikator warna status (Merah: Kritis, Oranye: Siaga, Hijau: Aman)</li>
+                <li><span class="feature-bullet-dot"></span> Marker Kampus Tuguran UNTIDAR dengan animasi pulse coordinate</li>
+                <li><span class="feature-bullet-dot"></span> Pencarian instan dan filter wilayah (Magelang Utara, Tengah, Selatan)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Modul 2 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="7.5" cy="18" r="2" fill="white" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="17.5" cy="18" r="2" fill="white" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>2. Logistik Armada & Optimasi CVRP</h3>
+              <p>
+                Manajemen pengiriman truk sampah berbasis algoritma CVRP dengan kalkulasi efisiensi muatan bak truk, pemangkasan jarak tempuh, penghematan BBM solar, dan reduksi emisi gas buang.
+              </p>
+              <ul class="feature-bullets">
+                <li><span class="feature-bullet-dot"></span> Urutan kunjungan closed-loop (Pool DLH &rarr; TPS Kritis &rarr; TPA Banyuurip)</li>
+                <li><span class="feature-bullet-dot"></span> Surat Perintah Jalan (SPJ) digital yang diterbitkan resmi oleh operator</li>
+                <li><span class="feature-bullet-dot"></span> Estimasi waktu tiba supir pada tiap titik penampungan</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Modul 3 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M6 10h4M6 14h8M16 10v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>3. Diagnostik Sensor & Terminal Live</h3>
+              <p>
+                Pengawasan kesehatan register sensor telemetri secara mendalam, termasuk pembacaan mentah ADC, blind zone ultrasonik, konsentrasi gas pembusukan, dan koneksi serial bridge lokal.
+              </p>
+              <ul class="feature-bullets">
+                <li><span class="feature-bullet-dot"></span> Sensor JSN-SR04T, MQ-135 (Amonia), MQ-4 (Metana), dan DHT22 (Suhu)</li>
+                <li><span class="feature-bullet-dot"></span> Terminal console paket data live dari port USB Serial atau WebSocket</li>
+                <li><span class="feature-bullet-dot"></span> Tombol pengujian koneksi hardware langsung dari browser web</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Modul 4 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 7.5L12 3l8 4.5v9L12 21l-8-4.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M4.5 7.8L12 12.1l7.5-4.3M12 12.2V21" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>4. Master Inventaris TPS Kota Magelang</h3>
+              <p>
+                Basis data terpusat seluruh Tempat Penampungan Sementara yang terdaftar di Kota Magelang, spesifikasi wadah penampungan HDPE 120 L, alamat lengkap, dan riwayat telemetri terakhir.
+              </p>
+              <ul class="feature-bullets">
+                <li><span class="feature-bullet-dot"></span> Tabel responsif dengan dukungan sentuh untuk smartphone &amp; tablet</li>
+                <li><span class="feature-bullet-dot"></span> Indikator peringatan sanitasi bau organik per lokasi penampungan</li>
+                <li><span class="feature-bullet-dot"></span> Tombol inspeksi langsung ke peta dari baris tabel inventaris</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         IMPACT & EFFICIENCY SECTION
+         ============================================================================== -->
+    <section class="impact-section" id="dampak">
+      <div class="container">
+        <div class="text-center center-box">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>Kuantifikasi Manfaat</span>
+          </div>
+          <h2 class="section-title">Efisiensi Terukur untuk Kota Berkelanjutan</h2>
+          <p class="section-desc center-box">
+            Data hasil simulasi dan pengujian operasional membuktikan implementasi SUGENG memangkas biaya logistik serta menekan dampak lingkungan secara signifikan.
+          </p>
+        </div>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <span class="impact-val">43,7%</span>
+            <div class="impact-title">Efisiensi Jarak Rute</div>
+            <p class="impact-desc">Memangkas jarak tempuh armada dari 17,4 km (rute konvensional) menjadi hanya 9,8 km teroptimasi.</p>
+          </div>
+
+          <div class="impact-card">
+            <span class="impact-val">2,1 L</span>
+            <div class="impact-title">Penghematan Solar</div>
+            <p class="impact-desc">Mengurangi konsumsi bahan bakar solar industri pada armada Isuzu Elf 6-Roda di setiap ritase penjemputan.</p>
+          </div>
+
+          <div class="impact-card">
+            <span class="impact-val">5,5 kg</span>
+            <div class="impact-title">Reduksi Emisi CO₂</div>
+            <p class="impact-desc">Menurunkan emisi karbon ekivalen per perjalanan, mendukung target udara bersih dan kota ramah lingkungan.</p>
+          </div>
+
+          <div class="impact-card">
+            <span class="impact-val">100%</span>
+            <div class="impact-title">Daya Mandiri Surya</div>
+            <p class="impact-desc">Node telemetri bekerja secara mandiri tanpa ketergantungan jaringan listrik PLN melalui panel surya 50Wp.</p>
+          </div>
+        </div>
+
+        <!-- Domain Architecture Callout Card -->
+        <div class="architecture-callout" id="arsitektur">
+          <div class="arch-header">
+            <div class="eyebrow" style="color: var(--green-3); margin-bottom: 6px;">Arsitektur Domain SUGENG</div>
+            <h3>Struktur Akses Platform Terpadu</h3>
+            <p>
+              Ekosistem SUGENG dipisahkan menjadi dua layer domain untuk membedakan kebutuhan informasi masyarakat umum dengan ruang kendali teknis Dinas Lingkungan Hidup:
+            </p>
+          </div>
+          <div class="arch-diagram-boxes">
+            <div class="arch-box active">
+              <div>
+                <div class="arch-box-domain">sugenghub.my.id</div>
+                <div class="arch-box-role">Portal Informasi Publik &amp; Profil Riset (Anda saat ini)</div>
+              </div>
+              <span style="font-size: 11px; font-weight: 800; color: var(--green);">WEBSITE UTAMA</span>
+            </div>
+            <div class="arch-box">
+              <div>
+                <div class="arch-box-domain">dash.sugenghub.my.id</div>
+                <div class="arch-box-role">Pusat Operasi, Peta GIS, CVRP, &amp; Ingest IoT Telemetri</div>
+              </div>
+              <a href="https://dash.sugenghub.my.id" class="btn btn-sm btn-primary" target="_blank" rel="noopener noreferrer">Buka ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         RESEARCH & ACADEMIC COLLABORATION
+         ============================================================================== -->
+    <section class="academic-section" id="tim">
+      <div class="container">
+        <div class="text-center center-box">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>Kolaborasi Akademik &amp; Pemerintahan</span>
+          </div>
+          <h2 class="section-title">Inovasi Riset untuk Kota Magelang</h2>
+          <p class="section-desc center-box">
+            Proyek Akhir Terapan Program Studi S-1 Teknologi Informasi, Fakultas Teknik, Universitas Tidar bekerja sama dengan Dinas Lingkungan Hidup Kota Magelang.
+          </p>
+        </div>
+
+        <div class="academic-grid">
+          <div class="academic-card">
+            <h4>Tim Peneliti &amp; Pengembang Mahasiswa</h4>
+            <p>
+              Dikembangkan sebagai pemenuhan Proyek Akhir Mata Kuliah Internet of Things (Tahun Akademik 2026/2027) di bawah bimbingan dosen program studi.
+            </p>
+            <div class="team-list">
+              <div class="team-item">
+                <small>Ketua Tim / Hardware Lead</small>
+                <strong>Farrel Apriandry Ciu</strong>
+                <span>NPM. 2430506056 · S-1 TI UNTIDAR</span>
+              </div>
+              <div class="team-item">
+                <small>Anggota / Data &amp; System Analyst</small>
+                <strong>Nabila Syafiqah Zahran Firlina</strong>
+                <span>NPM. 2430506058 · S-1 TI UNTIDAR</span>
+              </div>
+              <div class="team-item" style="grid-column: 1 / -1; border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 4px;">
+                <small>Dosen Pengampu Mata Kuliah</small>
+                <strong>Muhamad Maksum Hidayat, S.Kom., M.Kom.</strong>
+                <span>NIP. 199506302025061003</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="untidar-partner-box">
+            <div class="partner-logo-row">
+              <div class="partner-icon">FT</div>
+              <div class="partner-info">
+                <h4>Universitas Tidar (UNTIDAR)</h4>
+                <p>Program Studi S-1 Teknologi Informasi · Fakultas Teknik</p>
+              </div>
+            </div>
+            <div class="partner-logo-row" style="border-top: 1px solid var(--line); padding-top: 14px;">
+              <div class="partner-icon" style="background: #eaf4ee; color: var(--green);">DLH</div>
+              <div class="partner-info">
+                <h4>Dinas Lingkungan Hidup Kota Magelang</h4>
+                <p>Unit Pengelolaan Persampahan &amp; TPSA Banyuurip</p>
+              </div>
+            </div>
+            <div style="font-size: 11.5px; color: var(--muted); line-height: 1.5; margin-top: 6px;">
+              Proyek ini berfokus pada implementasi teknologi tepat guna yang menjawab tantangan nyata krisis persampahan di wilayah perkotaan.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         CLOSING CTA
+         ============================================================================== -->
+    <section class="cta-section">
+      <div class="container cta-box">
+        <div class="eyebrow">
+          <span class="eyebrow-dot" style="background: var(--lime);"></span>
+          <span>Akses Ruang Kendali</span>
+        </div>
+        <h2 class="cta-title">Siap Melihat Sistem SUGENG Beroperasi Secara Langsung?</h2>
+        <p class="cta-desc">
+          Buka dashboard operasional untuk memantau status keterisian TPS secara live, menjalankan simulasi rute CVRP, dan membaca register sensor IoT Kota Magelang.
+        </p>
+        <div class="cta-btn-group">
+          <a href="https://dash.sugenghub.my.id" class="btn btn-lg cta-btn-primary" target="_blank" rel="noopener noreferrer">
+            <span>Masuk ke Dashboard Operasi (dash.sugenghub.my.id) ↗</span>
+          </a>
+          <a href="#beranda" class="btn btn-lg cta-btn-outline">
+            <span>Kembali ke Atas ↑</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==============================================================================
+       FOOTER
+       ============================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="./" class="brand" style="margin-bottom: 12px;">
+            <img class="brand-logo-img" src="./assets/img/LOGO_SUGENG_IMUP.png" alt="Logo SUGENG">
+            <span class="brand-name">SUGENG</span>
+          </a>
+          <p class="footer-brand-desc">
+            Sistem Unggulan Pengelolaan dan Monitoring Sampah Berbasis Internet of Things (IoT) dan Algoritma Capacitated Vehicle Routing Problem (CVRP) Kota Magelang.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navigasi</h5>
+          <ul class="footer-links">
+            <li><a href="#tentang">Tentang Sistem</a></li>
+            <li><a href="#alur-kerja">Alur Kerja 3 Langkah</a></li>
+            <li><a href="#fitur">Fitur Utama</a></li>
+            <li><a href="#dampak">Dampak &amp; Efisiensi</a></li>
+            <li><a href="#tim">Tim &amp; Riset</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Ekosistem</h5>
+          <ul class="footer-links">
+            <li><a href="https://sugenghub.my.id">sugenghub.my.id (Landing)</a></li>
+            <li><a href="https://dash.sugenghub.my.id" target="_blank" rel="noopener noreferrer">dash.sugenghub.my.id (Dashboard)</a></li>
+            <li><a href="https://github.com/FarrelApriandry/Sugeng-Web-Dashboard" target="_blank" rel="noopener noreferrer">GitHub Frontend</a></li>
+            <li><a href="https://github.com/FarrelApriandry/BE-SUGENG" target="_blank" rel="noopener noreferrer">GitHub Backend</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Studi Kasus</h5>
+          <p style="font-size: 12px; color: var(--muted); margin: 0 0 10px; line-height: 1.5;">
+            Dinas Lingkungan Hidup Kota Magelang &amp; TPSA Banyuurip, Jawa Tengah, Indonesia.
+          </p>
+          <div style="font-size: 11px; font-family: var(--mono); color: var(--green); font-weight: 700;">
+            Koordinat EPSG:4326 · -7.4721, 110.2188
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-left">
+          <span>&copy; <span id="currentYear">2026</span> SUGENG Team · Universitas Tidar (UNTIDAR). All rights reserved.</span>
+        </div>
+        <div>
+          <span>Domain Utama: <strong>sugenghub.my.id</strong> · Subdomain Kontrol: <strong>dash.sugenghub.my.id</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/main.js"></script>
+</body>
+</html>

@@ -172,6 +172,7 @@ button {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .brand-logo-img {
@@ -192,6 +193,7 @@ button {
   letter-spacing: 0.08em;
   color: var(--green-3);
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .brand-tag {
@@ -200,12 +202,13 @@ button {
   letter-spacing: 0.06em;
   color: var(--muted);
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -214,12 +217,13 @@ button {
 .nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 8px 14px;
+  padding: 6px 12px;
   font-size: 13px;
   font-weight: 600;
   color: var(--ink-2);
   border-radius: var(--radius-sm);
   transition: all 0.16s ease;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -230,7 +234,8 @@ button {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .nav-status-badge {
@@ -1735,6 +1740,25 @@ button {
    Three-State Reflow: Desktop (>=1024), Tablet (768-1023), Mobile (<768)
    ============================================================================== */
 
+@media (max-width: 1200px) {
+  .brand-tag {
+    display: none;
+  }
+
+  .nav-actions .nav-status-badge {
+    display: none;
+  }
+
+  .nav-menu {
+    gap: 2px;
+  }
+
+  .nav-link {
+    padding: 6px 9px;
+    font-size: 12.5px;
+  }
+}
+
 @media (max-width: 1023px) {
   .nav-menu {
     display: none;
@@ -1742,6 +1766,10 @@ button {
 
   .mobile-toggle {
     display: inline-flex;
+  }
+
+  .nav-actions .nav-status-badge {
+    display: none;
   }
 
   .mobile-drawer.open {
@@ -1936,7 +1964,24 @@ button {
   }
 }
 
-@media (max-width: 580px) {
+@media (max-width: 640px) {
+  .header {
+    height: 60px;
+  }
+
+  .brand-logo-img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+
   .nav-actions .btn-primary {
     display: none;
   }
